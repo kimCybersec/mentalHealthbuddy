@@ -3,6 +3,14 @@ from flask import Flask
 from flask_cors import CORS
 import os
 import base64
+from api.services.openaiHelper import OpenAIClient
+from api.services.safetyChecker import SafetyChecker, checkSafety
+
+__all__ = [
+    "OpenAIClient",
+    "SafetyChecker",
+    "checkSafety"
+]
 
 def createApp():
     app = Flask(__name__)
