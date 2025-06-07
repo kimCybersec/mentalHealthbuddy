@@ -1,0 +1,97 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1b1f23; /* Charcoal black */
+    color: #e0e0e0; /* Light grey text for contrast */
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: #0d1b2a; /* Deep navy */
+    color: #00b4d8; /* Vibrant cyan */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+/* Chatbox Container */
+.chatbox {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #252a34; /* Dark grey-blue */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 180, 216, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Chat Log */
+#chatLog {
+    background: #1e1e24;
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid #3a3f47;
+}
+
+/* Textarea */
+#userInput {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #00b4d8;
+    resize: none;
+    height: 80px;
+    background: #2c313a;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+/* Button */
+button {
+    background: #00b4d8; /* Vibrant cyan */
+    color: #1b1f23;
+    padding: 12px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0077b6; /* Deeper cyan on hover */
+    color: #ffffff;
+}
+
+/* Scrollbar Styling */
+#chatLog::-webkit-scrollbar {
+    width: 10px;
+}
+
+#chatLog::-webkit-scrollbar-thumb {
+    background-color: #0077b6;
+    border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chatbox {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    #userInput {
+        height: 60px;
+    }
+}
