@@ -1,6 +1,8 @@
 from api.routes.chat import chatBp
 from flask import Flask
 from flask_cors import CORS
+import os
+import base64
 
 def createApp():
     app = Flask(__name__)
@@ -10,6 +12,11 @@ def createApp():
     app.register_blueprint(chatBp)
     return app
 
+if "GOOGLE_CREDENTIALS" not in os.environ:
+    creds = base64.b64decode(os.environ["GOOGLE_CREDENTIALS"])
+    with open("mensmentalhealth.json", "wb") as f:
+        f.write(creds)
+        
 app = createApp()
 if __name__ == "__main__":
     app.run(debug=True)

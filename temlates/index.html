@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-  <h1>Mens Mental Health Chatbot</h1>
-
-  <div id="chat-box" class="chat-box"></div>
-
-  <form id="chat-form">
-    <input type="text" id="message-input" placeholder="Type your message..." required />
-    <select id="language-select">
+<div class="chat-container">
+  <h2>Mental Health Chatbuddy</h2>
+  <label for="language">Choose language</label>
+  <select id="language-select">
       <option value="en">English</option>
       <option value="de">Deutsch</option>
       <option value="sw">Kiswahili</option>
@@ -41,6 +37,11 @@
         <option value="ms">Bahasa Melayu</option>
         <option value="tl">Tagalog</option>
     </select>
+
+  <div id="chat-box" class="chat-box"></div>
+
+  <form id="chat-form">
+    <input type="text" id="user-input" placeholder="Talk to me niambie..." autocomplete="off" required />  
     <button type="submit">Send</button>
   </form>
 
