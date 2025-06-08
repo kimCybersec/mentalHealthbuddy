@@ -1,5 +1,5 @@
 import logging 
-import os
+
 
 logger = logging.getLogger("mentalHealthBot")
 logger.setlevel(logging.INFO)
