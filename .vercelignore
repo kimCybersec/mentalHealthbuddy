@@ -3,3 +3,7 @@ encoded.txt
 requirements.txt
 *.py
 .env
+api/
+.*
+*.py
+requirements.txt
