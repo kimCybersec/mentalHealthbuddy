@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "public": true,
-  "cleanUrls": true,
   "builds": [
     {
       "src": "frontend/public/**",
@@ -12,24 +10,33 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/static/(.*)",
-      "dest": "frontend/public/$1"
+      "source": "/static/(.*)",
+      "destination": "frontend/public/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "frontend/templates/index.html",
-      "headers": {
-        "Content-Type": "text/html"
-      }
+      "source": "/api/(.*)",
+      "destination": "https://mentalhealthbuddy.onrender.com/api/$1"
     },
     {
-      "src": "/resources",
-      "dest": "frontend/templates/resources.html",
-      "headers": {
-        "Content-Type": "text/html"
-      }
+      "source": "/resources",
+      "destination": "frontend/templates/resources.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "frontend/templates/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html"
+        }
+      ]
     }
   ]
 }
