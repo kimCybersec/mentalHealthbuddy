@@ -29,5 +29,11 @@
       "src": "/(.*)",
       "dest": "/frontend/templates/index.html"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://mentalhealthbuddy.onrender.com/api/$1"
+    }
   ]
 }
