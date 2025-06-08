@@ -1,19 +1,21 @@
 from flask import Flask
 from flask_cors import CORS
-
 from routes.chat import chat_bp
-from utils.logger import logger
+import os
 
-app = Flask(__name__)
-CORS(app)
+def create_app():
+    app = Flask(__name__)
+    CORS(app)
+    app.register_blueprint(chat_bp, url_prefix="/api/chat")
 
-logger()
+    @app.route('/')
+    def index():
+        return {"message": "Mental Health Bot API is running."}
 
-app.register_blueprint(chat_bp, url_prefix="/api/chat")
+    return app
 
-@app.route("/", methods=["GET"])
-def index():
-    return {"message": "Mental Health Chatbot API is running."}, 200
+app = create_app()
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
