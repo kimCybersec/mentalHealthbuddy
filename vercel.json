@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "public/**",
+      "src": "public/**/*",
       "use": "@vercel/static"
     },
     {
-      "src": "templates/**",
+      "src": "templates/**/*",
       "use": "@vercel/static"
     }
   ],
