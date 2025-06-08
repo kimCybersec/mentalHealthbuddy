@@ -1,0 +1,10 @@
+__pycache__/
+venv/
+*.md
+*.ipynb
+*.csv
+*.pkl
+*.h5
+*.pt
+tests/
+docs/
