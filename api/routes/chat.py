@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify 
-from middleware.rateLimiter import limiter 
-from services.firestore import save_chat, get_chat_history 
-from services.openaiHelper import generate_response 
-from utils.logger import logger
+from api.middleware.rateLimiter import limiter 
+from api.services.firestore import save_chat, get_chat_history 
+from api.services.openaiHelper import generate_response 
+from api.utils.logger import logger
 
 chat_bp = Blueprint('chat', __name__)
 

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.chat import chat_bp
+from api.routes.chat import chat_bp
 import os
 from dotenv import load_dotenv
 

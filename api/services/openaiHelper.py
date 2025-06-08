@@ -1,6 +1,6 @@
 import openai 
 import os
-from utils.safetyChecker import is_safe
+from api.utils.safetyChecker import is_safe
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
