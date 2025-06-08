@@ -21,6 +21,7 @@ instance/
 
 # Credentials and secrets
 mensmentalhealth.json
+encoded.txt
 
 # OS files
 .DS_Store

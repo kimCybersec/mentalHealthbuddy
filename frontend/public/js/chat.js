@@ -1,4 +1,4 @@
-const apiBase = "https://your-backend-url.onrender.com/chat"; 
+const apiBase = "http://0.0.0.0:8000/"; 
 let sessionId = localStorage.getItem("session_id") || Date.now().toString(); 
 localStorage.setItem("session_id", sessionId);
 
