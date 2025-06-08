@@ -1,8 +1,8 @@
-from services.openaiHelper import OpenAIClient
+from services.openaiHelper import generate_response
 from utils.safetyChecker import SafetyChecker, checkSafety
 
 __all__ = [
-    "OpenAIClient",
+    "generate_response",
     "SafetyChecker",
     "checkSafety"
 ]
