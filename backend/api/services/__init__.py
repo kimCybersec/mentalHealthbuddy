@@ -1,5 +1,5 @@
 from services.openaiHelper import OpenAIClient
-from services.safetyChecker import SafetyChecker, checkSafety
+from backend.api.utils.safetyChecker import SafetyChecker, checkSafety
 
 __all__ = [
     "OpenAIClient",

@@ -1,34 +1,18 @@
-import os
-from google.cloud import firestore
-from datetime import datetime
-from typing import List, Dict, Optional
-import uuid
+import firebase_admin 
+from firebase_admin import credentials, firestore 
+import os 
+import base64
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "mensmentalhealth.json"
+if not firebase_admin._apps: 
+    cred_data = base64.b64decode(os.getenv("GOOGLE_CREDENTIALS")) 
+    cred = credentials.Certificate.from_service_account_info(eval(cred_data)) 
+    firebase_admin.initialize_app(cred)
 
-db = firestore.Client()
-COLLECTIONNAME = "chatSessions"
+db = firestore.client()
 
-def createSessionId() -> str:
-    return str(uuid.uuid4())
+def save_chat(session_id, user_message, bot_response): 
+    db.collection("chats").add({ "session_id": session_id, "user": user_message, "bot": bot_response, "timestamp": firestore.SERVER_TIMESTAMP })
 
-def saveMessage(sessionId: str, role: str, content: str, lang: str = "en") -> None:
-    doc_ref = db.collection(COLLECTIONNAME).document(sessionId).collection("messages").document()
-    doc_ref.set({
-        "role": role,
-        "content": content,
-        "lang": lang,
-        "timestamp": datetime.utcnow()
-    })
-
-def getHistory(session_id: str) -> List[Dict]:
-    messages_ref = db.collection(COLLECTIONNAME).document(session_id).collection("messages")
-    messages = messages_ref.order_by("timestamp").stream()
-
-    return [
-        {
-            "role": msg.get("role"),
-            "content": msg.get("content")
-        }
-        for msg in (m.to_dict() for m in messages)
-    ]
+def get_chat_history(session_id): 
+    docs = db.collection("chats").where("session_id", "==", session_id).order_by("timestamp").stream() 
+    return [{"user": doc.to_dict()['user'], "bot": doc.to_dict()['bot']} for doc in docs]

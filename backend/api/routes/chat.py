@@ -1,52 +1,35 @@
-from flask import Blueprint, request, jsonify
-from services.openaiHelper import OpenAIClient
-from services.safetyChecker import checkSafety
-from services.firestore import saveMessage, getHistory, createSessionId
-from middleware.rateLimiter import rateLimiter
-from utils.logger import logger
+from flask import Blueprint, request, jsonify 
+from api.middleware.rateLimiter import limiter 
+from api.services.firestore import save_chat, get_chat_history 
+from api.services.openaiHelper import generate_response 
+from api.utils.logger import logger
 
-chatBp = Blueprint("chat", __name__)
-client = OpenAIClient()
+chat_bp = Blueprint('chat', __name__)
 
-@chatBp.route("/chat", methods=["POST"])
-@rateLimiter
-def chat():
-    try:
-        data = request.get_json()
-        lang = data.get("language", "en")
-        input = data.get("messages")
-        sessionId = data.get("sessionId") or createSessionId()
+@chat_bp.route('', methods=['POST']) 
+@limiter 
+def chat(): 
+    try: 
+        data = request.get_json() 
+        messages = data.get("messages", []) 
+        lang = data.get("lang", "en") 
+        session_id = data.get("session_id", "anonymous")
 
-        if not input:
-            return jsonify({"error": "You haven't talked to me yet"}), 400
-        
-        saveMessage(sessionId, "user", input, lang)
-        
-        messages = getHistory(sessionId)
-        
-        result = client.generateResponse(messages, lang, sessionId)
-        reply = result["reply"]
-        
-        saveMessage(sessionId, "assistant", reply, lang)
-        
-        return jsonify({
-            "reply": reply,
-            "sessionId": sessionId,
-            "safety_triggered": result["safety_triggered"]
-        })
-    
+        result = generate_response(messages, lang)
+        save_chat(session_id, messages[-1]['content'], result['reply'])
+        return jsonify(result)
+
     except Exception as e:
-        logger.exception("chat route failed")
+        logger.error(f"Chat error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
-@chatBp.route("/history/<session_id>", methods=["GET"])
-def chatHistory():
-    data = request.get_json()
-    sessionId = data.get("sessionId")
+@chat_bp.route('/history/<session_id>', methods=['GET']) 
+@limiter 
+def history(session_id): 
+    try: 
+        history = get_chat_history(session_id) 
+        return jsonify({"history": history}) 
     
-    if not sessionId:
-        return jsonify({"error": "Missing a sessionId"}), 400
-    
-    messages = getHistory(sessionId)
-    return jsonify(messages)
-
+    except Exception as e: 
+        logger.error(f"History error: {str(e)}") 
+        return jsonify({"error": str(e)}), 500

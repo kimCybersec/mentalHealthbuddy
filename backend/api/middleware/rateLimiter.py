@@ -1,21 +1,24 @@
-from flask import request, jsonify
-from time import time
-from functools import wraper
+from flask import request, jsonify 
+from functools import wraps
+import time
 
-RATELIMIT = 10
-TIMEWINDOW = 60  
-rateData = {}
+rate_limit_window = 60 # seconds 
+max_requests = 30 
+request_log = {}
 
-def rateLimiter(func):
-    def wrapper(*args, **kwargs):
-        ip = request.remote_addr
-        now = time()
-        windowData = rateData.get(ip, [])
-        windowData = [t for t in windowData if now - t < TIMEWINDOW]
-        if len(windowData) >= RATELIMIT:
-            return jsonify({"error": "Rate limit exceeded. Give me a minute to cool down."}), 429
-        windowData.append(now)
-        rateData[ip] = windowData
+def limiter(func): 
+    @wraps(func) 
+    def wrapper(*args, **kwargs): 
+        ip = request.remote_addr 
+        now = time.time()
+
+        if ip not in request_log:
+            request_log[ip] = []
+        request_log[ip] = [t for t in request_log[ip] if now - t < rate_limit_window]
+
+        if len(request_log[ip]) >= max_requests:
+            return jsonify({"error": "Rate limit exceeded. Try again later."}), 429
+
+        request_log[ip].append(now)
         return func(*args, **kwargs)
     return wrapper
-   
