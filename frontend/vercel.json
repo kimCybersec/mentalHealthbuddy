@@ -16,20 +16,6 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/frontend/public/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "api/wsgi.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/templates/index.html"
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
