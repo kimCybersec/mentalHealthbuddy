@@ -1,5 +1,5 @@
 from flask import Flask 
-from api.routes.chat import chat_bp 
+from routes.chat import chat_bp 
 from flask_cors import CORS
 
 app = Flask(__name__) 
