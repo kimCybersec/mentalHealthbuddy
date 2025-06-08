@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}}) 
 
 app.register_blueprint(chat_bp, url_prefix="/api/chat")
 
