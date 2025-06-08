@@ -1,21 +1,22 @@
+# app.py
+
 from flask import Flask
 from flask_cors import CORS
-from routes.chat import chat_bp
+from api.routes.chat import chat_bp  # Adjust if your blueprint is in a different path
+from dotenv import load_dotenv
 import os
 
-def create_app():
-    app = Flask(__name__)
-    CORS(app)
-    app.register_blueprint(chat_bp, url_prefix="/api/chat")
+load_dotenv()
 
-    @app.route('/')
-    def index():
-        return {"message": "Mental Health Bot API is running."}
+app = Flask(__name__)
+CORS(app)
 
-    return app
+# Register blueprints
+app.register_blueprint(chat_bp, url_prefix='/api/chat')
 
-app = create_app()
+@app.route('/')
+def home():
+    return {'message': 'Mental Health Chatbot API is live!'}
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    app.run(debug=True)
