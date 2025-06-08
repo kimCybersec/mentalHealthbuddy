@@ -1,29 +1,33 @@
 {
-    "version": 2,
-    "public": "true",
-    "cleashUrls": true,
-    "builds": [
-        {
-            "src": "api/wsgi.py",
-            "use": "@vercel/python",
-            "config": {
-                "maxLambdaSize": "15mb",
-                "runtime": "python3.11"    
-            }
-        },
-        {
-            "src": "static/(**)",
-            "use": "@vercel/static"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/templates/index.html"
-        }
-    ]
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "builds": [
+    {
+      "src": "api/wsgi.py",
+      "use": "@vercel/python",
+      "config": { 
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.10" 
+      }
+    },
+    {
+      "src": "frontend/public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/frontend/public/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "api/wsgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/templates/index.html"
+    }
+  ]
 }

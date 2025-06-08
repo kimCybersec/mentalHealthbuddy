@@ -1,4 +1,4 @@
-const apiBase = "http://0.0.0.0:8000/"; 
+const apiBase = "https://mentalhealthbuddy.onrender.com"; 
 let sessionId = localStorage.getItem("session_id") || Date.now().toString(); 
 localStorage.setItem("session_id", sessionId);
 
