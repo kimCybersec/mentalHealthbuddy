@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Mental Health buddy{% endblock %}</title>
-        <link rel="stylesheet" href="/public/css/style.css">
-        <script src="/public/js/chat.js"></script>
-    </head>
-            <body>
-                <header>
-                    <nav>
-                        <a href="{{url_for('index')}}">Chat</a>
-                        <a href="{{url_for('resources')}}">Resources</a>
-                    </nav>
-                    <h1>
-                        Mental Health buddy
-                    </h1>
-                </header>
-                <main>
-                    {% block content %}
-                    {% endblock %}
-                </main>
-            </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Mental Health Buddy</title>
+  <link rel="stylesheet" href="frontend/public/css/style.css">
+  <script src="frontend/public/js/script.js"></script>
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
 </html>
