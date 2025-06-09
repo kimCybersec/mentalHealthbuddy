@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "use": "https://mentalhealthbuddy.onrender.com/api/$1"
+      "use": "https://mentalhealthbuddy.onrender.com"
     }
   ]
 }
