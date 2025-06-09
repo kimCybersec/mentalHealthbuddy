@@ -1,9 +1,27 @@
 {
   "version": 2,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://mentalhealthbuddy.onrender.com/api/$1"
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/style.css",
+      "dest": "public/style.css"
+    },
+    {
+      "src": "/chat.js",
+      "dest": "public/chat.js"
+    },
+    {
+      "src": "/resources",
+      "dest": "public/resources.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "public/base.html"
     }
   ]
 }

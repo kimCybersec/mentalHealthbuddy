@@ -1,36 +1,15 @@
-{% extends "frontend/public/base.html" %}
-
-{% block content %}
-<div class="chat-container">
-  <div class="language-selector">
-    <label for="language-select">Language:</label>
-    <select id="language-select" class="language-dropdown">
-      <option value="en">English</option>
-      <option value="sw">Kiswahili</option>
-      <option value="fr">Français</option>
-      <option value="es">Español</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-      <option value="ar">العربية</option>
-      <option value="zh">中文</option>
-      <option value="ja">日本語</option>
-      <option value="ru">Русский</option>
-      <option value="hi">हिन्दी</option>
-      <option value="bn">বাংলা</option>
-      <option value="tr">Türkçe</option>
-      <option value="de">Deutsch</option>
-    </select>
-  </div>
-
-  <div id="chat-box" class="chat-box"></div>
-
-  <form id="chat-form" class="message-form">
-    <input type="text" id="user-input" placeholder="How are you feeling today?" required>
-    <button type="submit" class="send-button">Send</button>
-  </form>
-
-  <button id="clear-session" class="clear-button">
-    <span class="icon">🗑️</span> Clear Chat
-  </button>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health Chat</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <script>
+    // Redirect to the main app
+    window.location.href = "/";
+  </script>
+</body>
+</html>

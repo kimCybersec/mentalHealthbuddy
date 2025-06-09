@@ -1,59 +1,34 @@
-{% extends /frontend/public/base.html %}
-{% block content %}
-<h2>Mental health resources</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health Resources</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="resources-container">
+    <h2>Mental Health Resources</h2>
+    
+    <section class="resource-section">
+      <h3>Emergency Contacts</h3>
+      <ul class="resource-list">
+        <li><strong>One2One:</strong> 1190</li>
+        <li><strong>Emergency Medicine Kenya:</strong> 0800 723 253</li>
+        <li><strong>Niskize:</strong> 0900 620 800</li>
+      </ul>
+    </section>
 
-<section>
-    <h3>Emergency Contacts</h3>
-    <ul>
-        <li>
-            <strong>One2One:</strong> 1190 (one2one)
-        </li>
-        <li>
-            <strong>Emergency Medicine Kenya Foundation(EMKF):</strong>(254) 0800 723 253 / (254) 710 633 855
-        </li>
-        <li>
-            <strong>Niskize Mental Health Centre:</strong> 0900 620 800/ (254) 718 227 440
-        </li>
-        <li>
-            <strong>Kenya Red Cross:</strong> 1199 / 0700395395 / 0738395395
-        </li>
-        <li>
-            <strong>Befrienders Kenya:</strong> 254722178177
-        </li>
-        <li>
-            <strong>Germany:</strong> 0800 111 0 111 or 112 mentalhealth hotline
-        </li>
-    </ul>
-</section>
+    <section class="resource-section">
+      <h3>Online Resources</h3>
+      <ul class="resource-list">
+        <li><a href="https://enableme.ke" target="_blank">EnableMe Kenya</a></li>
+        <li><a href="https://niskize.co.ke" target="_blank">Niskize Counseling</a></li>
+      </ul>
+    </section>
 
-<section>
-    <h3>Online Resources</h3>
-    <ul>
-        <li>
-            <a href="https://www.enableme.ke/en/article/suicide-emergency-numbers-and-free-counselling-centers-in-kenya-3770">enableme.ke</a> - Emergency Numbers and Free Counselling Centers in Kenya.
-        </li>
-        <li>
-            <a href="https://www.emergencymedicinekenya.org/suicide/">Emergency Medicine Kenya Foundation(EMKF)</a> - We offers support and education for individuals affected by mental illness.
-        </li>
-        <li>
-            <a href="https://niskize.co.ke/">Niskize</a> - Niskize is a leading psychological counseling where we put you above.
-        </li>
-        <li>
-            <a href="ManTherapy.org">Man therapy</a> - Mental health for men with humor and resources
-        </li>
-    </ul>
-</section>
-
-<section>
-    <h3>Self-Care tips</h3>
-    <ul>
-        <li>Talk to someone you like regularly.</li>
-        <li>Take breaks and allow rest for yourself.</li>
-        <li>Exercise, meditate and sleep well</li>
-        <li>Limit alcohol and substance abuse</li>
-        <li>Seek professional help when overwhelmed</li>
-    </ul>
-</section>
-
-<a href="{{url_for('static', filename = 'css/styles.css')}}" > Back to chat</a>
-{% endblock %}
+    <a href="/" class="back-button">← Back to Chat</a>
+  </div>
+  <script src="/chat.js"></script>
+</body>
+</html>
