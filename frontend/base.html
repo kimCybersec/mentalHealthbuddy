@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Mental Health Companion{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <script src="/static/js/chat.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <h1>Mental Health Companion</h1>
+      <p class="tagline">Strength through conversation</p>
+    </div>
+    <nav class="main-nav">
+      <a href="/" class="nav-link active">Chat</a>
+      <a href="/resources" class="nav-link">Resources</a>
+    </nav>
+  </header>
+
+  <main class="content-container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="app-footer">
+    <p>Confidential support for men • Available 24/7</p>
+  </footer>
+</body>
+</html>
