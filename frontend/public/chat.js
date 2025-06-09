@@ -52,8 +52,8 @@ function initChat() {
     chatBox.innerHTML = "";
     sessionId = Date.now().toString();
     localStorage.setItem("session_id", sessionId);
-  };
-});
+};
+}
 
 function addMessage(role, content) {
   const chatBox = document.getElementById("chat-box");
