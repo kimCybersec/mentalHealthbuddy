@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Check if we're on the chat page
   if (document.querySelector('.chat-container')) {
     initChat();
   }
 });
 
 function initChat() {
-  const apiBase = "https://mentalhealthbuddy.onrender.com";
+  const apiBase = "/api";
   let sessionId = localStorage.getItem("session_id") || Date.now().toString();
   localStorage.setItem("session_id", sessionId);
 
@@ -15,10 +14,8 @@ function initChat() {
   const clearBtn = document.getElementById("clear-session");
   const langSelect = document.getElementById("language-select");
 
-  // Load chat history
   loadHistory();
 
-  // Form submission
   form.onsubmit = async (e) => {
     e.preventDefault();
     const input = document.getElementById("user-input");
@@ -29,7 +26,7 @@ function initChat() {
     input.value = "";
 
     try {
-      const res = await fetch(`${apiBase}/api/chat`, {
+      const res = await fetch(`${apiBase}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -38,7 +35,6 @@ function initChat() {
           session_id: sessionId
         })
       });
-      
       const data = await res.json();
       addMessage("assistant", data.reply);
     } catch (err) {
@@ -46,13 +42,12 @@ function initChat() {
     }
   };
 
-  // Clear session
   clearBtn.onclick = () => {
     localStorage.removeItem("session_id");
     chatBox.innerHTML = "";
     sessionId = Date.now().toString();
     localStorage.setItem("session_id", sessionId);
-};
+  };
 }
 
 function addMessage(role, content) {
@@ -72,7 +67,7 @@ async function loadHistory() {
   if (!sessionId) return;
 
   try {
-    const res = await fetch(`${apiBase}/api/history/${sessionId}`);
+    const res = await fetch(`/api/history/${sessionId}`);
     const data = await res.json();
     data.history.forEach(m => {
       addMessage("user", m.user);
