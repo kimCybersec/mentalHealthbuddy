@@ -2,8 +2,7 @@ import generativeai as genai
 import os
 from api.utils.safetyChecker import is_safe
 
-# Configure Generative AI with your API key
-genai.configure(api_key=os.getenv("GEMINI_API_KEY")) # Assuming GEMINI_API_KEY for consistency
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 def generate_response(messages, lang):
     last_msg = messages[-1]['content']
@@ -39,31 +38,18 @@ def generate_response(messages, lang):
     }.get(lang, "en")
 
     model = genai.GenerativeModel('gemini-pro')
-
-    # Convert messages format from OpenAI to Gemini
-    # Gemini expects messages as a list of dicts with 'role' and 'parts'
-    # The system prompt also needs to be handled.
-    # For a simple chat scenario, we can prepend the system prompt to the first user message
-    # or handle it as a 'system' role if the model supports it directly in chat.
-    # For 'gemini-pro', it's often better to include the system prompt in the first user turn's context.
-
-    # This is a simplified conversion. For more complex conversational flows,
-    # you might need to adjust how 'messages' are structured for Gemini.
     gemini_messages = []
     if sys_prompt:
-        # Prepend system prompt to the first user message if it exists
         if messages:
-            # Create a user message containing the system prompt and the first user message
-            # Or if the first message is not 'user', prepend a user message with just the system prompt
             if messages[0]['role'] == 'user':
                 gemini_messages.append({'role': 'user', 'parts': [sys_prompt + "\n" + messages[0]['content']]})
                 for msg in messages[1:]:
                     gemini_messages.append({'role': msg['role'], 'parts': [msg['content']]})
-            else: # If the first message is not user, just add the system prompt as a user message
-                gemini_messages.append({'role': 'user', 'parts': [sys_prompt]})
+                else:
+                    gemini_messages.append({'role': 'user', 'parts': [sys_prompt]})
                 for msg in messages:
                     gemini_messages.append({'role': msg['role'], 'parts': [msg['content']]})
-        else: # If no messages, just start with the system prompt as a user message
+        else:
             gemini_messages.append({'role': 'user', 'parts': [sys_prompt]})
     else:
         for msg in messages:
@@ -75,12 +61,11 @@ def generate_response(messages, lang):
             gemini_messages,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.7,
-                max_output_tokens=250 # Corresponds to max_tokens in OpenAI
+                max_output_tokens=250 
             )
         )
         return {"reply": response.text, "safety": False}
     except Exception as e:
-        # Handle potential errors from the Generative AI API, e.g., safety concerns, rate limits
         print(f"Error generating content: {e}")
         return {"reply": "I'm sorry, I couldn't generate a response at this time. Please try again later.", "safety": True}
 
