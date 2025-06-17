@@ -21,15 +21,15 @@ async function loadHistory() {
     const history = await res.json();
 
     if (!Array.isArray(history)) {
-      addMessage("assistant", "⚠️ Invalid history format.");
+      addMessage("assistant", "⚠️ Invalid chat history format.");
       return;
     }
 
-    for (const m of history) {
-      if (m.role === "user") {
-        addMessage("user", m.content);
-      } else if (m.role === "assistant") {
-        addMessage("assistant", m.content);
+    for (const message of history) {
+      if (message.role === "user") {
+        addMessage("user", message.content);
+      } else if (message.role === "assistant") {
+        addMessage("assistant", message.content);
       }
     }
   } catch (err) {
