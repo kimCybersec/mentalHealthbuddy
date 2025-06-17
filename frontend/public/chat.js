@@ -20,10 +20,15 @@ async function loadHistory() {
     const res = await fetch(`${apiBase}/history/${sessionId}`);
     const history = await res.json();
 
-    if (!Array.isArray(history)) {
+    if (Array.isArray(data.history)) {
+      data.history.forEach(m => {
+        if (m.user) addMessage("user", m.user);
+        if (m.bot) addMessage("assistant", m.bot);
+      });
+    } else {
       addMessage("assistant", "⚠️ Invalid chat history format.");
-      return;
     }
+
 
     for (const message of history) {
       if (message.role === "user") {

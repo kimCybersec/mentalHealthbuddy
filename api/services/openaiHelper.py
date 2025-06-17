@@ -37,7 +37,7 @@ def generate_response(messages, lang):
         "vi": "Bạn là một trợ lý sức khỏe tâm thần nói tiếng Việt trôi chảy.",
     }.get(lang, "en")
 
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     gemini_messages = []
     if sys_prompt:
         if messages:
