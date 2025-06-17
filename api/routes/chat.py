@@ -27,9 +27,11 @@ def chat():
 @limiter 
 def history(session_id): 
     try: 
+        logger.info(f"Fetching history for session: {session_id}")
         history = get_chat_history(session_id) 
+        logger.info(f"History result: {history}")
         return jsonify({"history": history}) 
     
     except Exception as e: 
-        logger.error(f"History error: {str(e)}") 
+        logger.error(f"History error for session {session_id}: {str(e)}") 
         return jsonify({"error": str(e)}), 500
