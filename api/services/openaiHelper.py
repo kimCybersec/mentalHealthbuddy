@@ -1,4 +1,4 @@
-import generativeai as genai
+import google.generativeai as genai
 import os
 from api.utils.safetyChecker import is_safe
 
