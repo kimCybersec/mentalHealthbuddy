@@ -13,7 +13,7 @@ function addMessage(role, content) {
 
   const avatar = document.createElement("img");
   avatar.className = "avatar";
-  avatar.src = role === "user" ? "/static/img/user.png" : "/static/img/assistant.png";
+  avatar.src = role === "user" ? "user.png" : "bot.png";
   avatar.alt = `${role} avatar`;
 
   const bubble = document.createElement("div");
