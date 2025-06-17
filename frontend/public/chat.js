@@ -7,32 +7,28 @@ const form = document.getElementById("chat-form");
 const clearBtn = document.getElementById("clear-session");
 const langSelect = document.getElementById("language-select");
 
-function formatTime() {
-  const now = new Date();
-  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
 function addMessage(role, content) {
   const msg = document.createElement("div");
   msg.className = `message ${role}`;
 
-  const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const avatar = document.createElement("img");
   avatar.className = "avatar";
-  avatar.src = role === "user" ? "user.png" : "bot.png";
+  avatar.src = role === "user" ? "/static/img/user.png" : "/static/img/assistant.png";
   avatar.alt = `${role} avatar`;
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
+
+  // Render markdown for assistant, plain text for user
   if (role === "assistant") {
-    bubble.innerHTML = content;  
+    bubble.innerHTML = marked.parse(content);
   } else {
     bubble.innerText = content;
   }
 
   const time = document.createElement("div");
   time.className = "timestamp";
-  time.innerText = timestamp;
+  time.innerText = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
   msg.appendChild(avatar);
   msg.appendChild(bubble);
@@ -40,7 +36,6 @@ function addMessage(role, content) {
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
-
 
 async function loadHistory() {
   try {
@@ -66,6 +61,7 @@ form.onsubmit = async (e) => {
   const input = document.getElementById("message");
   const msg = input.value.trim();
   if (!msg) return;
+
   addMessage("user", msg);
   input.value = "";
 
