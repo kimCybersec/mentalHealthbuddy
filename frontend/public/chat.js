@@ -17,7 +17,7 @@ function addMessage(role, content) {
   msgWrapper.className = `message-wrapper ${role}`;
 
   const avatar = document.createElement("img");
-  avatar.src = role === "user" ? "frontend/img/user.png" : "/static/img/bot.png";
+  avatar.src = role === "user" ? "/frontend/img/user.png" : "/static/img/bot.png";
   avatar.alt = role;
   avatar.className = "avatar";
 
