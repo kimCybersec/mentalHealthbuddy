@@ -10,6 +10,7 @@ def generate_response(messages, lang):
         return {"reply": "If you are in crisis, please contact local mental health resources.", "safety": True}
 
     sys_prompt = {
+        "please avoid as much as possible using very long texts use short easily understandable text and make your speech concious, fun and inviting"
         "en": "You are a compassionate mental health assistant focused on men's mental health but can also listen to women.....",
         "sw": "Wewe ni msaidizi wa afya ya akili ambaye anawasiliana kwa ufasaha kwa Kiswahili.",
         "fr": "Vous êtes un assistant en santé mentale qui communique couramment en français.",
