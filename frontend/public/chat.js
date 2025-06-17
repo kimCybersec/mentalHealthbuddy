@@ -18,15 +18,26 @@ function addMessage(role, content) {
 async function loadHistory() {
   try {
     const res = await fetch(`${apiBase}/history/${sessionId}`);
-    const data = await res.json();
-    data.history.forEach(m => {
-      addMessage("user", m.user);
-      addMessage("assistant", m.bot);
-    });
+    const history = await res.json();
+
+    if (!Array.isArray(history)) {
+      addMessage("assistant", "⚠️ Invalid history format.");
+      return;
+    }
+
+    for (const m of history) {
+      if (m.role === "user") {
+        addMessage("user", m.content);
+      } else if (m.role === "assistant") {
+        addMessage("assistant", m.content);
+      }
+    }
   } catch (err) {
     console.error("Failed to load chat history:", err);
+    addMessage("assistant", "⚠️ Could not load chat history.");
   }
 }
+
 
 form.onsubmit = async (e) => {
   e.preventDefault();
