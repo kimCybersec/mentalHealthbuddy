@@ -7,17 +7,32 @@ const form = document.getElementById("chat-form");
 const clearBtn = document.getElementById("clear-session");
 const langSelect = document.getElementById("language-select");
 
+function formatTime() {
+  const now = new Date();
+  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
 function addMessage(role, content) {
-  const msg = document.createElement("div");
-  msg.className = role;
+  const msgWrapper = document.createElement("div");
+  msgWrapper.className = `message-wrapper ${role}`;
 
-  // Only user messages get chat bubble styling
-  if (role === "user") {
-    msg.classList.add("bubble");
-  }
+  const avatar = document.createElement("img");
+  avatar.src = role === "user" ? "/static/img/user.png" : "/static/img/bot.png";
+  avatar.alt = role;
+  avatar.className = "avatar";
 
-  msg.innerText = content;
-  chatBox.appendChild(msg);
+  const bubble = document.createElement("div");
+  bubble.className = `message ${role}`;
+  bubble.innerText = content;
+
+  const timestamp = document.createElement("div");
+  timestamp.className = "timestamp";
+  timestamp.innerText = formatTime();
+
+  msgWrapper.appendChild(avatar);
+  msgWrapper.appendChild(bubble);
+  msgWrapper.appendChild(timestamp);
+  chatBox.appendChild(msgWrapper);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
@@ -45,7 +60,6 @@ form.onsubmit = async (e) => {
   const input = document.getElementById("message");
   const msg = input.value.trim();
   if (!msg) return;
-
   addMessage("user", msg);
   input.value = "";
 
@@ -59,12 +73,11 @@ form.onsubmit = async (e) => {
         session_id: sessionId
       })
     });
-
     const data = await res.json();
     addMessage("assistant", data.reply);
   } catch (err) {
-    addMessage("assistant", "⚠️ Error reaching the server.");
     console.error("Fetch error:", err);
+    addMessage("assistant", "⚠️ Error reaching the server.");
   }
 };
 
