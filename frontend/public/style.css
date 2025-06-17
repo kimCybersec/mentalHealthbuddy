@@ -87,6 +87,36 @@ body {
   margin-right: auto;
   border-bottom-left-radius: 4px;
 }
+#chat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.user {
+  align-self: flex-end;
+  max-width: 80%;
+}
+
+.bubble {
+  background-color: #ffcc66;
+  color: #000;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin: 8px;
+  font-family: sans-serif;
+  text-align: right;
+}
+
+.assistant {
+  align-self: flex-start;
+  margin: 8px;
+  max-width: 85%;
+  color: #fff;
+  font-family: sans-serif;
+}
+
+
 
 /* Resources page styles */
 .resources-container {

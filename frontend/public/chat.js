@@ -10,6 +10,12 @@ const langSelect = document.getElementById("language-select");
 function addMessage(role, content) {
   const msg = document.createElement("div");
   msg.className = role;
+
+  // Only user messages get chat bubble styling
+  if (role === "user") {
+    msg.classList.add("bubble");
+  }
+
   msg.innerText = content;
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
@@ -18,7 +24,7 @@ function addMessage(role, content) {
 async function loadHistory() {
   try {
     const res = await fetch(`${apiBase}/history/${sessionId}`);
-    const history = await res.json();
+    const data = await res.json();
 
     if (Array.isArray(data.history)) {
       data.history.forEach(m => {
@@ -28,26 +34,18 @@ async function loadHistory() {
     } else {
       addMessage("assistant", "⚠️ Invalid chat history format.");
     }
-
-
-    for (const message of history) {
-      if (message.role === "user") {
-        addMessage("user", message.content);
-      } else if (message.role === "assistant") {
-        addMessage("assistant", message.content);
-      }
-    }
   } catch (err) {
     console.error("Failed to load chat history:", err);
     addMessage("assistant", "⚠️ Could not load chat history.");
   }
 }
 
-
 form.onsubmit = async (e) => {
   e.preventDefault();
   const input = document.getElementById("message");
-  const msg = input.value;
+  const msg = input.value.trim();
+  if (!msg) return;
+
   addMessage("user", msg);
   input.value = "";
 
@@ -61,6 +59,7 @@ form.onsubmit = async (e) => {
         session_id: sessionId
       })
     });
+
     const data = await res.json();
     addMessage("assistant", data.reply);
   } catch (err) {
