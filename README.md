@@ -32,39 +32,12 @@ A supportive and multilingual mental health chatbot built with **Flask**, **Open
 | Database      | Firebase Firestore             |
 | Deployment    | Vercel (frontend), Render (API)|
 
----
-
-## 📁 Project Structure
-
-```
-
-mentalhealth-bot/
-├── api/                      # Flask backend
-│   ├── routes/               # Chat endpoint
-│   ├── services/             # Firebase, OpenAI, Gemini
-│   └── utils/                # Logging and rate limiting
-├── static/
-│   ├── css/style.css         # UI styling
-│   ├── js/chat.js            # Chat UI logic
-│   └── img/                  # Avatars
-├── templates/                # HTML templates
-│   ├── index.html
-│   └── base.html
-├── .env                      # API keys (ignored)
-├── vercel.json               # Vercel config
-├── mensmentalhealth.json     # Firebase config
-└── README.md
-
-````
-
----
-
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/mentalhealth-bot.git
+git clone https://github.com/yourusername/mentalHealthbuddy.git
 cd mentalhealth-bot
 ````
 
