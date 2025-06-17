@@ -77,7 +77,7 @@ Visit: `http://localhost:5000`
 
 * Built with [Firebase](https://firebase.google.com), and [Gemini](https://ai.google.dev/).
 * Designed for awareness and emotional wellness during **Men's Mental Health Month**.
-* Developed with ❤️ by \PH03N1X
+* Developed with ❤️ by PH03N1X
 
 
 ## 📜 License
