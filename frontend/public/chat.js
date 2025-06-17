@@ -13,28 +13,34 @@ function formatTime() {
 }
 
 function addMessage(role, content) {
-  const msgWrapper = document.createElement("div");
-  msgWrapper.className = `message-wrapper ${role}`;
+  const msg = document.createElement("div");
+  msg.className = `message ${role}`;
 
+  const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const avatar = document.createElement("img");
-  avatar.src = role === "user" ? "user.png" : "bot.png";
-  avatar.alt = role;
   avatar.className = "avatar";
+  avatar.src = role === "user" ? "user.png" : "bot.png";
+  avatar.alt = `${role} avatar`;
 
   const bubble = document.createElement("div");
-  bubble.className = `message ${role}`;
-  bubble.innerText = content;
+  bubble.className = "bubble";
+  if (role === "assistant") {
+    bubble.innerHTML = content;  
+  } else {
+    bubble.innerText = content;
+  }
 
-  const timestamp = document.createElement("div");
-  timestamp.className = "timestamp";
-  timestamp.innerText = formatTime();
+  const time = document.createElement("div");
+  time.className = "timestamp";
+  time.innerText = timestamp;
 
-  msgWrapper.appendChild(avatar);
-  msgWrapper.appendChild(bubble);
-  msgWrapper.appendChild(timestamp);
-  chatBox.appendChild(msgWrapper);
+  msg.appendChild(avatar);
+  msg.appendChild(bubble);
+  msg.appendChild(time);
+  chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+
 
 async function loadHistory() {
   try {
