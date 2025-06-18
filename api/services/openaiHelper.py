@@ -35,10 +35,9 @@ def generate_response(messages, lang):
         "bg": "Вие сте асистент по психично здраве, който говори свободно български.",
         "ro": "Ești un asistent în sănătatea mintală care vorbește fluent română.",
         "vi": "Bạn là một trợ lý sức khỏe tâm thần nói tiếng Việt trôi chảy."
-        "please avoid as much as possible using very long texts use short easily understandable text and make your speech concious, fun and inviting"
     }.get(lang, "en")
 
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.0-flash')
     gemini_messages = []
     if sys_prompt:
         if messages:
@@ -61,8 +60,8 @@ def generate_response(messages, lang):
         response = model.generate_content(
             gemini_messages,
             generation_config=genai.types.GenerationConfig(
-                temperature=0.7,
-                max_output_tokens=250 
+                temperature=1.2,
+                max_output_tokens=500
             )
         )
         return {"reply": response.text, "safety": False}
