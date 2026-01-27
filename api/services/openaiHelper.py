@@ -68,7 +68,7 @@ def generate_response(messages, lang="en"):
             "parts": [content]
         })
 
-    model = genai.GenerativeModel("gemini-1.5-flash-latest")
+    model = genai.GenerativeModel("gemini-2.0-flash-lite")
 
     try:
         response = model.generate_content(
